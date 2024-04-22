@@ -1,0 +1,12 @@
+Please limit your answer to every question to five sentences or less.
+
+Q1: Train a machine learning classifier, please specify i) your classification method, and ii) the loss function for multi-class classification.
+
+Q2: Please describe a method to estimate your performance before testing on the test set.
+
+Q3: Please list the key hyperparameter values to consider, e.g., the choice of optimizer (e.g., Adam, SGD), learning rate, batch size, and possibly the architecture of machine learning classifier.
+
+Q4: Please list the key Python packages used in this assignment.
+
+Q5: If applicable, discuss any other methods attempted besides the one submitted, along with their outcomes and reasons for not choosing them.
+
