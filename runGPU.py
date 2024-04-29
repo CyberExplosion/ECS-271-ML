@@ -1,9 +1,11 @@
 from collections import OrderedDict
 import time
 import torch
+import torch.utils
+import torch.utils.data
 from tqdm import trange
-from loader import CoordinateDataset, Loader
-from models import MLP
+from loader import CoordinateDataset, Loader, ReshapeCoordinateDataset
+from models import CNN, MLP, RNN
 from runBuilderManager import RunBuilder, RunManager
 
 
@@ -13,20 +15,19 @@ STATISTIC_PATH = "./savedStatistics"
 TIMESTAMP = time.strftime("%Y%m%d-%H%M%S")
 
 paramsADAM = OrderedDict(
-    epoch=[500],
-    kfoldSplit=[5],
+    epoch=[300],
+    kfoldSplit=[10],
     lr=[0.001],
-    batch_size=[500],
-    num_worker=[4],
-    model=[MLP],
+    batch_size=[512],
+    num_worker=[0],
+    model=[RNN],
     optim=[torch.optim.Adam],
     criterion=[torch.nn.CrossEntropyLoss],
-    autocast=[True, False]
+    autocast=[False]
 )
 
-
 class Train:
-    def __init__(self, params, trainData):
+    def __init__(self, params, trainData: torch.utils.data.Dataset):
         self.manager = RunManager(STATISTIC_PATH, TIMESTAMP)
         self.runBuilder = RunBuilder(params)
         self.trainData = trainData
@@ -40,6 +41,7 @@ class Train:
             ).get_data_loaders()
 
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            print(f"Device: {device}")
             model = run.model().to(device)
             criterion = run.criterion()
             optimizer = run.optim(model.parameters(), lr=run.lr)
@@ -88,5 +90,7 @@ class Train:
 
 # Test the train
 if __name__ == "__main__":
-    data = CoordinateDataset("data/studentsdigits-train.csv")
+    # data = CoordinateDataset("data/studentsdigits-modified.csv")
+    # data = ReshapeCoordinateDataset("data/studentsdigits-modified.csv")
+    data = ReshapeCoordinateDataset("data/studentsdigits-train.csv")
     train = Train(paramsADAM, data).run()

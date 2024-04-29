@@ -126,8 +126,6 @@ class RunManager:
         valid_loss = self.epoch_valid_loss / len(self.valid_loader.dataset)
         valid_accuracy = self.epoch_numValid_correct / len(self.valid_loader.dataset)
 
-        print(f'Loss: {train_loss:.4f}, Accuracy: {train_accuracy:.4f} at epoch {self.epoch_count}/{self.run_params.epoch}')
-        print(f'Val_Loss: {valid_loss:.4f}, Val_Accuracy: {valid_accuracy:.4f} at epoch {self.epoch_count}/{self.run_params.epoch}')
         self.tb.add_scalars(
             "Loss", {"trainLoss": train_loss, "validLoss": valid_loss}, self.epoch_count
         )
@@ -137,12 +135,9 @@ class RunManager:
             self.epoch_count,
         )  # Add scalar is use when at the end of epoch
 
-        print(f'Model named parameters: {self.model.named_parameters()}')
         for name, param in self.model.named_parameters():
             self.tb.add_histogram(name, param, self.epoch_count)
-            print(f"param: {name} and {param}")
-            if param.grad is not None:
-                print(f'param.grad: {name} and {param.grad}')
+            if param.grad != None:
                 self.tb.add_histogram(f"{name}.grad", param.grad, self.epoch_count)
 
         results = {}
@@ -165,6 +160,7 @@ class RunManager:
             if self.earlyStop.early_stop:
                 self.stop = True
         
+        # print(f'Current run data: {self.run_data}')
 
     def track_train_loss(self, loss):
         self.epoch_train_loss += loss.item() * self.train_loader.batch_size

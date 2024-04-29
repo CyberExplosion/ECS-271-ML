@@ -1,10 +1,13 @@
 Please limit your answer to every question to five sentences or less.
 
 Q1: Train a machine learning classifier, please specify i) your classification method, and ii) the loss function for multi-class classification.
+I choose a simple shallow RNN as a machine learning classifier. For loss function I use Cross-Entropy for multi-class labeling.
 
 Q2: Please describe a method to estimate your performance before testing on the test set.
+I trained the model using k-fold cross validation, with the kfold split of 10 gives the best performance. After every fold I check the model evaluation accuracy as well as their loss. I keeps a record of every epochs using the tensorboard library as well as keep track of each fold performance using a simple .csv file. Since the model training accuracy improve over time and the validation accuracy also increase over time, Im highly confident that the model is learning what I want it to learn. The training loss and validation loss also went down during training so I know that the model also achieve a high level of confident.
 
 Q3: Please list the key hyperparameter values to consider, e.g., the choice of optimizer (e.g., Adam, SGD), learning rate, batch size, and possibly the architecture of machine learning classifier.
+
 
 Q4: Please list the key Python packages used in this assignment.
 
