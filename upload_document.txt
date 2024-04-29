@@ -1,5 +1,7 @@
 Please limit your answer to every question to five sentences or less.
 
+(Since I can only submit the .ipynb file, I cannot include all the experiments and works I described down here. The full works can be see at my repo: https://github.com/CyberExplosion/ECS-271-ML)
+
 Q1: Train a machine learning classifier, please specify i) your classification method, and ii) the loss function for multi-class classification.
 I choose a simple shallow RNN as a machine learning classifier. For loss function, I use Cross-Entropy for multi-class labeling.
 
