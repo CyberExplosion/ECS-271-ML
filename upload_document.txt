@@ -1,19 +1,19 @@
-Please limit your answer to every question to five sentences or less.
+Complete this document and upload along with your prediction results and your code.
 
-(Since I can only submit the .ipynb file, I cannot include all the experiments and works I described down here. The full works can be see at my repo: https://github.com/CyberExplosion/ECS-271-ML)
+### Method Name ###
+Use a phrasal name to describe your method, e.g. training a BiLSTM cross-encoder from scratch, fine-tuning RoBERTa-large-MNLI, etc.
 
-Q1: Train a machine learning classifier, please specify i) your classification method, and ii) the loss function for multi-class classification.
-I choose a simple shallow RNN as a machine learning classifier. For loss function, I use Cross-Entropy for multi-class labeling.
+### Sentence pair encoder ###
+Use up to 5 sentences to describe your encoder for the sentence pairs. Need to mention the following:
+- Is it a bi-encoder or cross-encoder?
+- What type of encoder (LSTM, Transformer, etc.)
+- Is it based on a pre-trained model (BERT-large? RoBERTa-large-SNLI? BART-large-MNLI?) or completely trained from scratch by yourself (then how do you chracterize the words and aggregate them into sentence representations)?
 
-Q2: Please describe a method to estimate your performance before testing on the test set.
-I trained the model using k-fold cross-validation, with the k-fold split of 10 giving the best performance. After every fold, I check the model evaluation accuracy as well as their loss. I keep a record of every epoch using the tensorboard library as well as keep track of each fold performance using a simple .csv file. Since the model training accuracy improves over time and the validation accuracy also increases over time, I'm highly confident that the model is learning what I want it to learn. The training loss and validation loss also went down during training so I know that the model also achieved a high level of confidence.
+### Training & Development ###
+Up to 5 sentences: how did you evaluate your solution using the dev set before submitting to the leaderboard? What are some key hyperparameter values (e.g., optimizer, learning rate, batch size, etc.)? Did you fine-tune your model or just conducted zero-shot transfer from a pre-trained model? If fine-tuning, what portion of data did you use and how did you terminate the training (using a fixed #epochs, early stopping based on dev set performance)?
 
-Q3: Please list the key hyperparameter values to consider, e.g., the choice of the optimizer (e.g., Adam, SGD), learning rate, batch size, and possibly the architecture of the machine learning classifier.
-The number of running epochs per fold, the number of fold splits, the learning rate, the batch size for loading data from the training folds, and the model itself (MLP, CNN, RNN). For the optimizer, I've only tested with ADAM, but since it gives very good performance I've been sticking with it. For the loss function, it's CrossEntropyLoss due to classifying multiple labels.
+### Other methods ###
+Did you try other methods than the submitted one?
 
-Q4: Please list the key Python packages used in this assignment.
-Pytorch, Scikit-learn, tensorboard, pandas, tqdm, NumPy
-
-Q5: If applicable, discuss any other methods attempted besides the one submitted, along with their outcomes and reasons for not choosing them.
-I began with a simple MLP, however, I noticed a very strong training accuracy, but once the validation fold came, the accuracy and loss for the validation fold did not improve in any way. This tells me that the model is overfitting to a particular training fold and generalizes well enough for new data.
-I was then thinking that maybe regularization would help, but figured the problem its due to the type of data we working with would not work well with simple MLP. I then tried to use a simple shallow CNN model because each x,y coordinate is a pixel of an image with a gray scale value of 1. However, this also does not give good performance. I then use RNN due to the sequential nature of the data with subsequent x,y coordinates related to one another.
+### Packages ###
+List the key python packages you have used in this assignment.
