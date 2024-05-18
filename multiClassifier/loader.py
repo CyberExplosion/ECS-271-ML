@@ -34,12 +34,6 @@ class ReshapeCoordinateDataset(torch.utils.data.Dataset):
 
 class Loader:
     def __init__(self, dataset, batch_size, num_workers, kfoldSplit=5):
-        """
-        dataset: pandas dataframe
-        batch_size: int
-        num_workers: int
-        kfoldSplit: int
-        """
         self.dataset = dataset
         self.batch_size = batch_size
         self.num_workers = num_workers

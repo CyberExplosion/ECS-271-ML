@@ -1,0 +1,10 @@
+# Have to use python version below 3.11
+torch
+torchvision
+torchaudio
+pandas
+transformers
+fairseq
+scikit-learn
+tensorboard
+tqdm
