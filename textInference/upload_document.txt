@@ -1,0 +1,27 @@
+Complete this document and upload along with your prediction results and your code.
+
+### Method Name ###
+Fine-tuning FacebookAI/roberta-large-mnli model
+
+### Sentence pair encoder ###
+The sentence pairs are encoded using bi-encoder that concatenated the precondition first then followed with the statement sentence. Afterward they are tokenized and saved into a folder to be reused. The encoder is based on the Transformer model. It is based on a pre-trained model RoBERTa-large-mnli and the texts are tokenized using a byte version of Byte-Pair Encoding (BPE) and a vocabulary size of 50,000.
+
+
+
+### Training & Development ###
+After every training epoch I evaluate the model using the dev set. I choose to use a range of different hyperparameter such as epoch numbers, learning rate, and batch size. Batch size and learning rate shows to give the biggest change in my training performace. I've found that learning rate of 1e-6 gives the most stable performance in training and evaluation performance. I terminate the training based on early stop with dev performance using a default patience of 7. The model tends to early stop around epoch 60-70.
+
+### Other methods ###
+I have tried just unfreeze the classification head of the model and train it only, however, they only gives around 70% dev accuracy, thus I have to unfreeze some layers. I also tried training without a decaying learning rate, but I found out from Tensorboard that the model accuracy and loss fluctuate very frequently, thus I suspect is due to a high learning rate.
+
+### Packages ###
+# Have to use python version below 3.11
+torch
+torchvision
+torchaudio
+pandas
+transformers
+fairseq
+scikit-learn
+tensorboard
+tqdm
